@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_COMPOSE_PATH = "/usr/local/bin/docker-compose"  // Absolute path to Docker Compose
+        DOCKER_COMPOSE_PATH = "/usr/bin/docker-compose"  // Absolute path to Docker Compose
     }
 
     stages {
