@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   mysql:
+    image: mysql:latest
     build:
       context: .
       dockerfile: Dockerfile.mysql
@@ -16,6 +17,7 @@ services:
       - mynetwork
 
   tomcat:
+    image: tomcat:latest
     build:
       context: .
       dockerfile: Dockerfile
