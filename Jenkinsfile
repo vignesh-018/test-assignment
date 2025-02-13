@@ -2,26 +2,26 @@ pipeline {
     agent any
 
     environment {
-        TOMCAT_CREDENTIALS = credentials('tomcat-credentials')  
-        TOMCAT_URL = "${env.tom-url}"
+        TOMCAT_CREDENTIALS = credentials('tomcat-credentials')  // Retrieve Tomcat credentials
+        TOMCAT_URL = credentials('tom-url')  // Retrieve Tomcat URL
     }
 
     stages {
         stage('Checkout Code') {
             steps {
-                git 'https://github.com/vignesh-018/test-assignment.git'  
+                git 'https://github.com/vignesh-018/test-assignment.git'  // Replace with your actual Git repository
             }
         }
 
         stage('Build') {
             steps {
-                sh 'mvn clean package' 
+                sh 'mvn clean package'  // Builds the Java application and generates a .war file
             }
         }
 
         stage('Test') {
             steps {
-                sh 'mvn test'  
+                sh 'mvn test'  // Runs unit tests
             }
         }
 
@@ -35,7 +35,7 @@ pipeline {
                         error "WAR file not found in workspace"
                     }
                     
-                    env.WAR_FILE = warFileName
+                    env.WAR_FILE = warFileName  // Store WAR file path as an environment variable
                     echo "WAR file found: ${env.WAR_FILE}"
                 }
             }
@@ -44,11 +44,10 @@ pipeline {
         stage('Deploy to Tomcat') {
             steps {
                 script {
-                    sh """
-                    curl -u ${TOMCAT_CREDENTIALS_USR}:${TOMCAT_CREDENTIALS_PSW} -T ${WAR_FILE} ${TOMCAT_URL}/manager/text/deploy?path=/app&update=true
-                    """
+                    withCredentials([usernamePassword(credentialsId: 'tomcat-credentials', usernameVariable: 'Username', passwordVariable: 'Password')]) {
+                        sh """
+                        curl -s -u ${TOMCAT_USER}:${TOMCAT_PASS} -T ${WAR_FILE} ${TOMCAT_URL}/manager/text/deploy?path=/app&update=true
+                        """
+                    }
                 }
             }
-        }
-    }
-}
