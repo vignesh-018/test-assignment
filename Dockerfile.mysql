@@ -1,0 +1,14 @@
+# Use the official MySQL image as the base
+FROM mysql:latest
+
+# Set environment variables for MySQL
+ENV MYSQL_ROOT_PASSWORD=testroot
+ENV MYSQL_DATABASE=testdb
+ENV MYSQL_USER=testuser
+ENV MYSQL_PASSWORD=docker@12345
+
+# Expose MySQL's port (only for Docker network use)
+EXPOSE 3306
+
+# Default command to run MySQL
+CMD ["mysqld"]

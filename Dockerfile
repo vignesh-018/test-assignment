@@ -1,5 +1,7 @@
+# we can also create from plain os as well, but here i used officiak images
+
 # Stage 1: Build the WAR file using Maven
-FROM maven:3.8.7-openjdk-11 AS build
+FROM maven:3.9.8-eclipse-temurin-21 AS build
 
 # Set working directory inside the container
 WORKDIR /app
