@@ -48,6 +48,9 @@ pipeline {
                         sh """
                         curl -s -u ${TOMCAT_USER}:${TOMCAT_PASS} -T ${WAR_FILE} ${TOMCAT_URL}/manager/text/deploy?path=/app&update=true
                         """
-                    }
+                     }
                 }
             }
+        }
+    }
+}
