@@ -63,5 +63,15 @@ pipeline {
                 }
             }
         }
+
+        stage('Build and Deploy with Docker Compose') {
+            steps {
+                script {
+                    sh '${DOCKER_COMPOSE_PATH} build'
+                    sh '${DOCKER_COMPOSE_PATH} up -d'
+                }
+            }
+        }
     }
 }
+
