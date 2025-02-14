@@ -58,7 +58,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'tomcat-credentials', usernameVariable: 'Username', passwordVariable: 'Password')]) {
                         // Uses Jenkins credentials to get username and password for Tomcat
                         sh """
-                            curl -s -u ${Username}:${Password} -T ${env.WAR_FILE} ${TOMCAT_URL}/manager/text/deploy?path=/app&update=true
+                            curl -s -u ${Username}:${Password} -T ${env.WAR_FILE} ${TOMCAT_URL}/manager/text/deploy?path=/test-app&update=true
                         """
                         // Uses curl to deploy the WAR file to Tomcat.  
                         // -s: Silent mode.
