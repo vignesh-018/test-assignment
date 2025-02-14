@@ -1,4 +1,4 @@
-# we can also create from plain os as well, but here i used officiak images
+# we can also create from plain os as well, but here i used docker official images
 
 # Stage 1: Build the WAR file using Maven
 FROM maven:3.9.8-eclipse-temurin-21 AS build
