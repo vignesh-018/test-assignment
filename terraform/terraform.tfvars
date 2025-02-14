@@ -1,0 +1,11 @@
+rgname = "define name for rg"
+location = "location for rg"
+vnetname = "define vnet name"
+vnet_address_space = ["specify address space"]
+subnetname = "define subnet name"
+subnet_address_prifixes = ["specify address prifixes"]
+nicname = "name for nerwork_interface_card"
+nsgname = "name for nsg_name"
+admin_username = "username"
+admin_password = "password_to_login_into_vm"
+vmname = "name for vm "
