@@ -105,8 +105,8 @@ resource "azurerm_linux_virtual_machine" "main" {
   make "disable_password_authentication = true" and define the below block
   admin_ssh_key {
     username   = "adminuser"
-    # ssh-keygen -t rsa -f C:\Terraform\SSHKeys\id_rsa  <-- command to generate keys in windows
-    public_key = file("C:/Terraform/SSHKeys/azurevm_rsa.pub") 
+    # ssh-keygen -t rsa -f "C:\Terraform\SSHKeys\id_rsa"  <-- command to generate keys in windows
+    public_key = file("~/.ssh/id_rsa.pub")) 
   }*/
 
 
