@@ -1,34 +1,32 @@
 pipeline {
-    // Defines the overall structure of the Jenkins Pipeline
-    agent any // Tells Jenkins to use any available agent (build executor)
+    agent any 
 
     environment {
-        // Defines environment variables used in the Pipeline
+
         TOMCAT_CREDENTIALS = credentials('tomcat-credentials') // Retrieves Tomcat credentials stored in Jenkins
         TOMCAT_URL = credentials('tom-url') // Retrieves Tomcat URL stored in Jenkins
     }
 
     stages {
-        // Defines the different stages of the Pipeline
 
         stage('Checkout Code') {
             // Stage for checking out the source code
             steps {
-                git branch: 'main', credentialsId: 'github-credentials', url: 'https://github.com/vignesh-018/test-assignment.git' // Checks out code from the specified Git repository.  **REPLACE THIS WITH YOUR ACTUAL REPO URL**
+                git branch: 'main', credentialsId: 'github-credentials', url: 'https://github.com/vignesh-018/test-assignment.git' // Checks out code from the specified Git repository.  
             }
         }
 
         stage('Build') {
             // Stage for building the application
             steps {
-                sh 'mvn clean package' // Executes a Maven command to clean, compile, package, and generate a WAR file.  Assumes you have a `pom.xml` in your repo.
+                sh 'mvn clean package' // Executes a Maven command to clean, compile, package, and generate a WAR file
             }
         }
 
         stage('Test') {
             // Stage for running unit tests
             steps {
-                sh 'mvn test' // Executes Maven command to run unit tests defined in `pom.xml`.
+                sh 'mvn test' 
             }
         }
 
@@ -60,14 +58,7 @@ pipeline {
                         sh """
                             curl -s -u ${Username}:${Password} -T ${env.WAR_FILE} ${TOMCAT_URL}/manager/text/deploy?path=/test-app&update=true
                         """
-                        // Uses curl to deploy the WAR file to Tomcat.  
-                        // -s: Silent mode.
-                        // -u: Username and password for authentication.
-                        // -T: Uploads the specified file.
-                        // ${env.WAR_FILE}: The path to the WAR file.
-                        // ${TOMCAT_URL}/manager/text/deploy: Tomcat manager URL for deployment.
-                        // ?path=/app: Specifies the context path for the application (e.g., /app).
-                        // &update=true: Updates the application if it already exists.
+
                     }
                 }
             }
